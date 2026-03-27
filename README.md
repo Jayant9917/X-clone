@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# X-Clone
 
-## Getting Started
+A Twitter-like social media interface built with Next.js, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Modern UI/UX**: Clean, Twitter-inspired interface with dark theme
+- **Responsive Design**: Built with Tailwind CSS grid system
+- **Interactive Sidebar**: Navigation with hover effects and icons
+- **Feed System**: Scrollable feed with post cards
+- **Smooth Animations**: Transition effects on interactive elements
+- **Hidden Scrollbars**: Clean scroll experience without visible scrollbars
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14+ with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Icons**: React Icons
+- **Images**: Next.js Image optimization
+
+## 📦 Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Jayant9917/X-clone.git
+   cd X-clone/client
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🏗️ Project Structure
+
+```
+client/
+├── app/
+│   ├── globals.css          # Global styles and scrollbar utilities
+│   ├── layout.tsx           # Root layout component
+│   └── page.tsx             # Main page with sidebar and feed
+├── components/
+│   └── FeedCard/
+│       └── index.tsx        # Individual post card component
+├── public/                  # Static assets (profile images)
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Key Components
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Main Layout (`app/page.tsx`)
+- **Sidebar**: Fixed navigation with Twitter-style menu items
+- **Feed Area**: Scrollable content area with multiple FeedCards
+- **Grid System**: 12-column responsive layout
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### FeedCard (`components/FeedCard/index.tsx`)
+- User profile information
+- Post content
+- Interaction buttons (comment, retweet, like, analytics, share)
 
-## Learn More
+## 🎯 Features Implemented
 
-To learn more about Next.js, take a look at the following resources:
+- ✅ Twitter-like sidebar navigation
+- ✅ Hover effects and transitions
+- ✅ Responsive grid layout
+- ✅ Hidden scrollbars with smooth scrolling
+- ✅ Icon integration (React Icons)
+- ✅ Dark theme styling
+- ✅ Profile image optimization
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Custom CSS Utilities
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The project includes custom CSS classes in `globals.css`:
 
-## Deploy on Vercel
+```css
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This provides cross-browser scrollbar hiding while maintaining scroll functionality.
+
+## 📱 Browser Support
+
+- Chrome/Edge (Modern)
+- Firefox
+- Safari
+- Mobile browsers
+
+## 🚀 Deployment
+
+Ready for deployment on platforms like:
+- Vercel (recommended for Next.js)
+- Netlify
+- Railway
+- Any Node.js hosting platform
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 👨‍💻 Author
+
+Built with ❤️ by [Jayant9917](https://github.com/Jayant9917)
+
+---
+
+**Note**: This is a frontend-only demonstration. Backend functionality, authentication, and real-time features would be needed for a production-ready Twitter clone.
