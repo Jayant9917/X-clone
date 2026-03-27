@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Geist, Geist_Mono } from "next/font/google";
+import GoogleProvider from "@/components/GoogleProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -32,7 +33,9 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className={`${inter.className} min-h-full flex flex-col`} suppressHydrationWarning>{children}</body>
+      <GoogleProvider>
+        <body className={`${inter.className} min-h-full flex flex-col`} suppressHydrationWarning>{children}</body>
+      </GoogleProvider>
     </html>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { FaTwitter } from "react-icons/fa";
 import { IoHomeOutline } from "react-icons/io5";
 import { FaHashtag } from "react-icons/fa";
@@ -8,6 +10,8 @@ import { FaRegUser } from "react-icons/fa6";
 import FeedCard from "@/components/FeedCard";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { CgMoreR } from "react-icons/cg";
+import { GoogleLogin } from '@react-oauth/google'
+import { useCallback } from 'react';
 
 interface TwitterSidebarButton {
   title: string;
@@ -52,10 +56,14 @@ const sidebarMenuItems: TwitterSidebarButton[] = [
 ];
 
 export default function Home() {
+  const handleLoginWithGoogle = useCallback(() => {
+    
+  }, [])
+  
   return (
     <div>
       <div className="grid grid-cols-12 h-screen w-screen px-56">
-        <div className="col-span-3 pt-1 px-4 ml-28">
+        <div className="col-span-3 pt-1 px-4">
           <div className="text-2xl h-fit w-fit hover:bg-gray-800 rounded-full p-2 cursor-pointer transition-all">
             <FaTwitter />
           </div>
@@ -73,7 +81,8 @@ export default function Home() {
             <button className="bg-[#1d9bf0] font-semibold text-lg p-4 rounded-full w-fullcursor-pointer">Tweet</button>
             </div>
           </div>
-        </div><div className="col-span-5 border-r border-l h-screen overflow-y-auto border-gray-600 scrollbar-hide">
+        </div>
+        <div className="col-span-5 border-r border-l h-screen overflow-y-auto border-gray-600 scrollbar-hide">
           <FeedCard />
           <FeedCard />
           <FeedCard />
@@ -86,7 +95,22 @@ export default function Home() {
           <FeedCard />
         </div>
         
-        <div className="col-span-3"></div>
+        <div className="col-span-3 p-5">
+          <div className="p-5 bg-slate-700 rounded-lg">
+            <h1 className="my-2 text-2xl font-bold">New to Twitter?</h1>
+            <div className="mt-4 flex justify-center">
+              <GoogleLogin 
+                onSuccess={(cred) => {
+                  console.log("Google Login Success:", cred);
+                }}
+                onError={() => {
+                  console.log("Google Login Failed");
+                }}
+              />
+            </div>
+            <p className="text-xs text-gray-400 mt-2 text-center">Google Login Button</p>
+          </div>
+        </div>
       </div>
     </div>
   );
