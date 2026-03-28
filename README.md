@@ -12,6 +12,7 @@ A full-stack Twitter-like social media application built with Next.js, TypeScrip
 - **Google OAuth** - User authentication
 - **React Hooks** - State management
 - **GraphQL Client** - For API communication
+- **GraphQL Code Generator** - Type generation for GraphQL
 
 ### Backend (Companion Repository)
 - **Node.js** - JavaScript runtime environment
@@ -21,6 +22,10 @@ A full-stack Twitter-like social media application built with Next.js, TypeScrip
 - **GraphQL** - Query language for APIs
 - **Prisma** - Modern database ORM and toolkit
 - **PostgreSQL** - Database (hosted on Supabase)
+- **JWT** - JSON Web Token authentication
+- **Google OAuth** - User authentication via Google
+- **@prisma/adapter-pg** - PostgreSQL adapter for Prisma v7
+- **dotenv** - Environment variable management
 
 ### Database & Infrastructure
 - **Supabase** - PostgreSQL hosting and services
@@ -34,8 +39,10 @@ A full-stack Twitter-like social media application built with Next.js, TypeScrip
 - **Interactive Sidebar**: Navigation with hover effects and icons
 - **Feed System**: Scrollable feed with post cards
 - **Google OAuth Integration**: User authentication with Google Sign-In
+- **JWT Authentication**: Secure session management with JSON Web Tokens
 - **GraphQL API**: Type-safe backend communication
 - **Database Integration**: PostgreSQL with Prisma ORM
+- **User Management**: Complete user authentication system
 - **Smooth Animations**: Transition effects on interactive elements
 - **Hidden Scrollbars**: Clean scroll experience without visible scrollbars
 - **Component Architecture**: Modular, reusable React components
@@ -51,12 +58,13 @@ A full-stack Twitter-like social media application built with Next.js, TypeScrip
 - **Authentication**: Google OAuth with @react-oauth/google
 - **State Management**: React Hooks (useCallback)
 
-## �️ Installation & Setup
+## 🛠️ Installation & Setup
 
 ### Prerequisites
 - Node.js (v18 or higher)
 - PostgreSQL database (via Supabase)
 - Google Cloud Console account (for OAuth)
+- GraphQL Code Generator (for type generation)
 
 ### 1. Clone Both Repositories
 ```bash
@@ -117,14 +125,21 @@ cd X-clone/client
 yarn dev
 ```
 
-### 7. Google OAuth Setup
+### 7. GraphQL Code Generation
+```bash
+cd X-clone/client
+yarn codegen
+```
+*Generates TypeScript types from GraphQL schema*
+
+### 8. Google OAuth Setup
 - Create a project in [Google Cloud Console](https://console.cloud.google.com/)
 - Enable Google+ API
 - Create OAuth 2.0 credentials
 - Add `http://localhost:3000` to Authorized JavaScript origins
 - Update the clientId in `components/GoogleProvider.tsx`
 
-### 8. Access the Application
+### 9. Access the Application
 - **Frontend**: [http://localhost:3000](http://localhost:3000)
 - **GraphQL Playground**: [http://localhost:8000/graphql](http://localhost:8000/graphql)
 
@@ -143,6 +158,7 @@ client/
 │   └── GoogleProvider.tsx   # Google OAuth provider wrapper
 ├── public/                  # Static assets (profile images)
 ├── .env.local               # Environment variables (Google Client ID)
+├── codegen.ts               # GraphQL Code Generator configuration
 ├── DEVELOPMENT_STEPS.md     # Complete development documentation
 ├── next.config.ts           # Next.js configuration with allowed origins
 ├── package.json             # Dependencies and scripts
@@ -203,7 +219,8 @@ type User {
 ### Available Queries
 ```graphql
 type Query {
-  sayHello: String
+  # User Authentication
+  verifyGoogleToken(token: String!): String
   # User queries to be added
   # Tweet queries to be added
 }
@@ -214,6 +231,39 @@ type Query {
 type Mutation {
   # User mutations to be added
   # Tweet mutations to be added
+}
+```
+
+## 🔐 Authentication System
+
+### Google OAuth + JWT Flow
+1. **Frontend gets Google ID token** via Google Sign-In
+2. **Frontend sends ID token** to `verifyGoogleToken` GraphQL query
+3. **Backend validates token** with Google's tokeninfo API
+4. **User creation/retrieval** in PostgreSQL database
+5. **Backend generates JWT token** for session management
+6. **JWT token returned** to frontend for authenticated requests
+
+### Authentication Features
+- ✅ **Google OAuth Integration** - Secure authentication via Google
+- ✅ **JWT Token Management** - JSON Web Token for session handling
+- ✅ **User Database Storage** - PostgreSQL with Prisma ORM
+- ✅ **Type Safety** - Full TypeScript support
+- ✅ **Error Handling** - Comprehensive error management
+
+### Example Authentication Query
+```graphql
+query VerifyGoogleToken {
+  verifyGoogleToken(token: "YOUR_GOOGLE_ID_TOKEN")
+}
+```
+
+**Response:**
+```json
+{
+  "data": {
+    "verifyGoogleToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
 }
 ```
 
@@ -230,6 +280,7 @@ type Mutation {
 - ✅ Dark theme styling
 - ✅ Profile image optimization
 - ✅ Component-based architecture
+- ✅ GraphQL Code Generator setup for type safety
 
 ### ✅ Backend Features
 - ✅ GraphQL server setup with Apollo Server
@@ -239,10 +290,17 @@ type Mutation {
 - ✅ Database migrations
 - ✅ Type-safe database operations
 - ✅ TypeScript configuration
+- ✅ Google OAuth authentication system
+- ✅ JWT token generation service
+- ✅ PostgreSQL adapter for Prisma v7
+- ✅ Modular user authentication system
+- ✅ Comprehensive error handling
+- ✅ Google token validation with Google API
 
 ### 🚧 Integration Features (In Progress)
 - 🔄 Frontend-Backend authentication flow
 - 🔄 GraphQL client setup in frontend
+- 🔄 JWT token management in frontend
 - 🔄 User CRUD operations
 - 🔄 Profile management system
 
@@ -250,27 +308,36 @@ type Mutation {
 
 ### Frontend
 - [ ] Set up GraphQL client (Apollo Client/urql)
-- [ ] Connect authentication with backend
+- [ ] Connect Google OAuth with backend JWT system
+- [ ] Implement JWT token storage and management
+- [ ] Add authentication state management
 - [ ] Implement user profile management
 - [ ] Add tweet creation and display
 - [ ] Implement real-time feed updates
 - [ ] Add error handling and loading states
+- [ ] Add protected routes with JWT verification
 
 ### Backend
 - [ ] Implement User CRUD operations (GraphQL mutations)
+- [ ] Add JWT token verification middleware
 - [ ] Add Tweet model and CRUD operations
 - [ ] Implement Like system and relationships
 - [ ] Add input validation and error handling
 - [ ] Add API rate limiting
 - [ ] Write unit tests
+- [ ] Implement refresh token system
+- [ ] Add user profile updates
+- [ ] Implement user follow/unfollow system
 
 ### Full Stack
-- [ ] Complete authentication flow
+- [ ] Complete end-to-end authentication flow
 - [ ] Real-time notifications with WebSockets
 - [ ] File upload for profile images
 - [ ] Pagination for feeds
 - [ ] Search functionality
 - [ ] Deployment configuration
+- [ ] Performance optimization
+- [ ] Security hardening
 
 ## 🔧 Custom CSS Utilities
 

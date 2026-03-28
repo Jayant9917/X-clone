@@ -10,7 +10,7 @@ import { FaRegUser } from "react-icons/fa6";
 import FeedCard from "@/components/FeedCard";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { CgMoreR } from "react-icons/cg";
-import { GoogleLogin } from '@react-oauth/google'
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
 import { useCallback } from 'react';
 
 interface TwitterSidebarButton {
@@ -56,7 +56,7 @@ const sidebarMenuItems: TwitterSidebarButton[] = [
 ];
 
 export default function Home() {
-  const handleLoginWithGoogle = useCallback(() => {
+  const handleLoginWithGoogle = useCallback((cred: CredentialResponse) => {
     
   }, [])
   
