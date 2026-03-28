@@ -35,8 +35,10 @@ export default function RootLayout({
       className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <GoogleProvider>
-        <body className={`${inter.className} min-h-full flex flex-col`} suppressHydrationWarning>{children}</body>
-        <Toaster />
+        <body className={`${inter.className} min-h-full flex flex-col`} suppressHydrationWarning>
+          {children}
+          <Toaster />
+        </body>
       </GoogleProvider>
     </html>
   );
