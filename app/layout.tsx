@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Geist, Geist_Mono } from "next/font/google";
 import GoogleProvider from "@/components/GoogleProvider";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const inter = Inter({
@@ -35,6 +36,7 @@ export default function RootLayout({
     >
       <GoogleProvider>
         <body className={`${inter.className} min-h-full flex flex-col`} suppressHydrationWarning>{children}</body>
+        <Toaster />
       </GoogleProvider>
     </html>
   );

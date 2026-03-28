@@ -236,42 +236,55 @@ type Mutation {
 
 ## 🔐 Authentication System
 
-### Google OAuth + JWT Flow
+### Google OAuth + JWT Flow (Implemented)
 1. **Frontend gets Google ID token** via Google Sign-In
 2. **Frontend sends ID token** to `verifyGoogleToken` GraphQL query
 3. **Backend validates token** with Google's tokeninfo API
 4. **User creation/retrieval** in PostgreSQL database
 5. **Backend generates JWT token** for session management
 6. **JWT token returned** to frontend for authenticated requests
+7. **JWT token stored** in localStorage for subsequent API calls
 
 ### Authentication Features
 - ✅ **Google OAuth Integration** - Secure authentication via Google
 - ✅ **JWT Token Management** - JSON Web Token for session handling
+- ✅ **Token Storage** - localStorage for client-side persistence
+- ✅ **GraphQL Client Integration** - Type-safe API communication
 - ✅ **User Database Storage** - PostgreSQL with Prisma ORM
 - ✅ **Type Safety** - Full TypeScript support
 - ✅ **Error Handling** - Comprehensive error management
+- ✅ **Headers Configuration** - Proper Authorization header setup
 
-### Example Authentication Query
-```graphql
-query VerifyGoogleToken {
-  verifyGoogleToken(token: "YOUR_GOOGLE_ID_TOKEN")
-}
+### GraphQL Client Setup
+The project uses `graphql-request` for type-safe GraphQL operations:
+
+```typescript
+// clients/api.ts
+import { GraphQLClient } from 'graphql-request';
+
+export const graphqlClient = new GraphQLClient('http://localhost:8000/graphql', {
+    headers: () => ({
+        Authorization: isClient ? `Bearer ${window.localStorage.getItem('__twitter_token')}` : ''
+    })
+});
 ```
 
-**Response:**
-```json
-{
-  "data": {
-    "verifyGoogleToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-  }
-}
+### Code Generation
+GraphQL types are automatically generated using GraphQL Code Generator:
+
+```bash
+yarn codegen
 ```
+
+This generates TypeScript types in the `gql/` directory based on the GraphQL schema.
 
 ## 🎯 Features Implemented
 
 ### ✅ Frontend Features
 - ✅ Twitter-like sidebar navigation with 8 menu items
 - ✅ Google OAuth authentication integration
+- ✅ GraphQL client setup with graphql-request
+- ✅ JWT token authentication with localStorage
 - ✅ Client-side interactivity with React hooks
 - ✅ Hover effects and transitions
 - ✅ Responsive grid layout
@@ -281,6 +294,7 @@ query VerifyGoogleToken {
 - ✅ Profile image optimization
 - ✅ Component-based architecture
 - ✅ GraphQL Code Generator setup for type safety
+- ✅ TypeScript error fixes for headers configuration
 
 ### ✅ Backend Features
 - ✅ GraphQL server setup with Apollo Server
@@ -297,19 +311,20 @@ query VerifyGoogleToken {
 - ✅ Comprehensive error handling
 - ✅ Google token validation with Google API
 
-### 🚧 Integration Features (In Progress)
-- 🔄 Frontend-Backend authentication flow
-- 🔄 GraphQL client setup in frontend
-- 🔄 JWT token management in frontend
+### 🚧 Integration Features (Completed)
+- ✅ Frontend-Backend authentication flow
+- ✅ GraphQL client setup in frontend (graphql-request)
+- ✅ JWT token management in frontend (localStorage)
+- ✅ Type-safe GraphQL operations with code generation
 - 🔄 User CRUD operations
 - 🔄 Profile management system
 
 ## 📋 TODO & Roadmap
 
 ### Frontend
-- [ ] Set up GraphQL client (Apollo Client/urql)
-- [ ] Connect Google OAuth with backend JWT system
-- [ ] Implement JWT token storage and management
+- [x] Set up GraphQL client (graphql-request)
+- [x] Connect Google OAuth with backend JWT system
+- [x] Implement JWT token storage and management
 - [ ] Add authentication state management
 - [ ] Implement user profile management
 - [ ] Add tweet creation and display
@@ -389,4 +404,4 @@ Built with ❤️ by [Jayant9917](https://github.com/Jayant9917)
 
 ---
 
-**Note**: This is a frontend-only demonstration. Backend functionality, authentication, and real-time features would be needed for a production-ready Twitter clone.
+**Note**: This frontend includes authentication integration with a companion backend repository. The project demonstrates modern full-stack development practices with TypeScript, GraphQL, and OAuth authentication.
