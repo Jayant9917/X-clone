@@ -5,14 +5,16 @@ A full-stack Twitter-like social media application built with Next.js, TypeScrip
 ## 🚀 Complete Tech Stack
 
 ### Frontend (Current Repository)
-- **Next.js 14+** - React framework with App Router
+- **Next.js 16+** - React framework with App Router and Turbopack
 - **TypeScript** - Type-safe JavaScript development
 - **Tailwind CSS v4** - Utility-first CSS framework
 - **React Icons** - Icon library
-- **Google OAuth** - User authentication
-- **React Hooks** - State management
-- **GraphQL Client** - For API communication
-- **GraphQL Code Generator** - Type generation for GraphQL
+- **Google OAuth** - User authentication via @react-oauth/google
+- **React Hooks** - State management with useCallback
+- **GraphQL Client** - Type-safe API communication with graphql-request
+- **GraphQL Code Generator** - Automated type generation from schema
+- **React Hot Toast** - Beautiful toast notifications
+- **Concurrently** - Run multiple development scripts
 
 ### Backend (Companion Repository)
 - **Node.js** - JavaScript runtime environment
@@ -34,29 +36,36 @@ A full-stack Twitter-like social media application built with Next.js, TypeScrip
 
 ## 🚀 Features
 
+### ✅ Implemented Features
 - **Modern UI/UX**: Clean, Twitter-inspired interface with dark theme
 - **Responsive Design**: Built with Tailwind CSS grid system
-- **Interactive Sidebar**: Navigation with hover effects and icons
-- **Feed System**: Scrollable feed with post cards
-- **Google OAuth Integration**: User authentication with Google Sign-In
-- **JWT Authentication**: Secure session management with JSON Web Tokens
-- **GraphQL API**: Type-safe backend communication
-- **Database Integration**: PostgreSQL with Prisma ORM
-- **User Management**: Complete user authentication system
-- **Smooth Animations**: Transition effects on interactive elements
-- **Hidden Scrollbars**: Clean scroll experience without visible scrollbars
+- **Interactive Sidebar**: Navigation with 8 menu items (Home, Explore, Notifications, Messages, Bookmarks, Profile, Money, More)
+- **Feed System**: Scrollable feed with post cards and hidden scrollbars
+- **Google OAuth Integration**: Complete user authentication with Google Sign-In
+- **JWT Authentication**: Secure session management with localStorage
+- **GraphQL API Integration**: Type-safe backend communication
+- **Real-time Code Generation**: Automated TypeScript types from GraphQL schema
+- **Toast Notifications**: User feedback with react-hot-toast
 - **Component Architecture**: Modular, reusable React components
-- **Full-Stack Ready**: Complete frontend-backend integration
+- **Development Toolchain**: Hot reload with Turbopack and concurrent script execution
+
+### 🔄 Backend Integration Ready
+- **User Authentication**: Complete OAuth flow with JWT token management
+- **Database Integration**: PostgreSQL with Prisma ORM (backend required)
+- **API Communication**: GraphQL queries and mutations ready
+- **Type Safety**: End-to-end TypeScript support
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 14+ with App Router
+- **Framework**: Next.js 16+ with App Router and Turbopack
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
 - **Icons**: React Icons
-- **Images**: Next.js Image optimization
 - **Authentication**: Google OAuth with @react-oauth/google
 - **State Management**: React Hooks (useCallback)
+- **API Client**: graphql-request
+- **Notifications**: react-hot-toast
+- **Code Generation**: GraphQL Code Generator with watch mode
 
 ## 🛠️ Installation & Setup
 
@@ -124,6 +133,15 @@ yarn dev
 cd X-clone/client
 yarn dev
 ```
+
+### 🚀 Development Features
+
+The frontend includes advanced development tooling:
+- **Turbopack**: Fast bundling and hot reload
+- **Concurrent Scripts**: GraphQL code generation runs alongside development server
+- **Auto Type Generation**: TypeScript types update automatically when GraphQL schema changes
+- **Toast Notifications**: Real-time feedback for user actions
+- **Component-Based Architecture**: Modular and maintainable code structure
 
 ### 7. GraphQL Code Generation
 ```bash
